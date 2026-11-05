@@ -1,0 +1,426 @@
+:root {
+	color-scheme: light;
+	font-family: "Segoe UI", Arial, sans-serif;
+	color: #17231c;
+	background: #f1f4f1;
+	font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body { min-width: 320px; min-height: 100vh; margin: 0; }
+.admin-body {
+	background-color: #f3f6f3;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='144' viewBox='0 0 144 144'%3E%3Cg fill='none' stroke='%23c1cec4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='.72'%3E%3Cg transform='translate(17 22)'%3E%3Cpath d='M7 12h32M7 5v14M2 7v10M39 5v14M44 7v10'/%3E%3C/g%3E%3Cg transform='translate(82 88) rotate(-35 22 12)'%3E%3Cpath d='M7 12h32M7 5v14M2 7v10M39 5v14M44 7v10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+	background-size: 144px 144px;
+}
+button, input, select { font: inherit; }
+
+.admin-header {
+	min-height: 76px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 12px clamp(20px, 5vw, 64px);
+	background: #10251b;
+	border-bottom: 4px solid #b4d83e;
+	color: #fff;
+}
+
+.admin-brand { display: flex; align-items: center; gap: 14px; color: #fff; text-decoration: none; font-weight: 800; letter-spacing: 1px; }
+.admin-brand img { width: 48px; height: 48px; padding: 3px; object-fit: contain; background: #fff; border-radius: 5px; }
+.admin-brand strong { color: #b4d83e; }
+.back-link { color: #dce3de; font-size: 14px; }
+.admin-main { width: min(1380px, 100%); margin: 0 auto; padding: clamp(22px, 4vw, 48px); }
+
+.admin-login-card, .register-customers-panel, .plans-panel, .payment-settings-panel, .memberships-panel, .payments-panel, .monthly-payments-panel, .payment-detail {
+	border: 1px solid #d8e0d9;
+	border-radius: 10px;
+	background: #fff;
+	box-shadow: 0 12px 32px #10251b0c;
+}
+
+.admin-login-card { width: min(100%, 440px); margin: 5vh auto; padding: clamp(24px, 5vw, 42px); }
+.register-customers-panel { margin-top: 24px; padding: 20px; }
+.register-customers-panel h2 { margin: 0; color: #10251b; font-size: 20px; }
+.register-customers-panel #register-customer-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 20px 0 8px; }
+.register-customers-panel #register-customer-form label { display: grid; align-content: start; gap: 6px; font-size: 12px; font-weight: 700; }
+.register-customers-panel #register-customer-form input, .register-customers-panel #register-customer-form select { width: 100%; min-width: 0; min-height: 42px; padding: 8px 10px; border: 1px solid #cbd6ce; border-radius: 5px; background: #fff; color: #17231c; }
+.register-customers-panel #register-customer-form input:focus-visible, .register-customers-panel #register-customer-form select:focus-visible { outline: 3px solid #16744630; border-color: #167446; }
+.register-customers-panel #register-customer-form button { align-self: end; min-height: 42px; }
+.plans-panel { margin-top: 24px; padding: 20px; }
+.plans-panel h2 { margin: 0; color: #10251b; font-size: 20px; }
+.payment-settings-panel { margin-top: 24px; padding: 20px; }
+.payment-settings-panel h2 { margin: 0; color: #10251b; font-size: 20px; }
+.payment-settings-panel #payment-settings-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 20px 0 8px; }
+.payment-settings-panel #payment-settings-form label { display: grid; align-content: start; gap: 6px; font-size: 12px; font-weight: 700; }
+.payment-settings-panel #payment-settings-form input { width: 100%; min-width: 0; min-height: 42px; padding: 8px 10px; border: 1px solid #cbd6ce; border-radius: 5px; background: #fff; color: #17231c; }
+.payment-settings-panel #payment-settings-form input:focus-visible { outline: 3px solid #16744630; border-color: #167446; }
+.payment-settings-panel #payment-settings-form button { align-self: end; min-height: 42px; }
+.plans-panel #plan-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 20px 0 8px; }
+.plans-panel #plan-form label { display: grid; align-content: start; gap: 6px; font-size: 12px; font-weight: 700; }
+.plans-panel #plan-form input, .plans-panel #plan-form select, .plans-panel #plan-form textarea { width: 100%; min-width: 0; min-height: 42px; padding: 8px 10px; border: 1px solid #cbd6ce; border-radius: 5px; background: #fff; color: #17231c; }
+.plans-panel #plan-form textarea { min-height: 86px; resize: vertical; }
+.plans-panel #plan-form input:focus-visible, .plans-panel #plan-form select:focus-visible, .plans-panel #plan-form textarea:focus-visible { outline: 3px solid #16744630; border-color: #167446; }
+.plans-panel #plan-form .plan-description-field, .plans-panel #plan-form .plan-benefits-field { grid-column: span 2; }
+.plans-panel #plan-form button { align-self: end; min-height: 42px; }
+.plan-thumbnail { width: 62px; height: 62px; object-fit: contain; border: 1px solid #d8e0d9; border-radius: 5px; background: #f3f6f3; }
+.memberships-panel { margin-top: 24px; padding: 20px; }
+.admin-login-card h1, .dashboard-heading h1 { margin: 8px 0 10px; color: #10251b; font-size: clamp(30px, 4vw, 42px); }
+.panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+.panel-heading h2 { margin: 0; color: #10251b; font-size: 20px; }
+.panel-heading .muted-copy { margin: 7px 0 0; }
+.admin-eyebrow { margin: 0; color: #167446; font-size: 11px; font-weight: 800; letter-spacing: 1.8px; }
+.muted-copy { color: #68736c; font-size: 14px; line-height: 1.6; }
+#admin-login-form { display: grid; gap: 9px; margin-top: 24px; }
+#admin-login-form label { margin-top: 6px; font-size: 13px; font-weight: 700; }
+#admin-login-form input, .payment-toolbar select {
+	width: 100%;
+	min-height: 46px;
+	padding: 9px 12px;
+	border: 1px solid #cbd6ce;
+	border-radius: 5px;
+	background: #fff;
+	color: #17231c;
+}
+#admin-login-form input:focus-visible, .payment-toolbar select:focus-visible { outline: 3px solid #16744630; border-color: #167446; }
+
+.primary-button, .secondary-button {
+	min-height: 42px;
+	padding: 9px 15px;
+	border: 0;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 700;
+}
+.primary-button { background: #167446; color: #fff; }
+.primary-button:hover { background: #10251b; }
+.primary-button:disabled { cursor: wait; opacity: .65; }
+.secondary-button { border: 1px solid #cbd6ce; background: #fff; color: #10251b; }
+.secondary-button:hover { background: #f3f6f3; }
+#admin-login-form .primary-button { margin-top: 12px; }
+
+.dashboard-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.payment-toolbar { display: flex; align-items: center; gap: 12px; margin: 26px 0 8px; }
+.payment-queue { margin-bottom: 20px; padding: 20px; }
+.monthly-payments-panel { margin: 0 0 20px; padding: 20px; }
+.monthly-payments-panel h2 { margin: 0; color: #10251b; font-size: 20px; }
+.monthly-payments-panel .payment-toolbar { flex-wrap: wrap; justify-content: space-between; }
+.monthly-payments-panel .muted-copy { flex-basis: 100%; margin: 7px 0 0; }
+.payment-toolbar label { font-size: 13px; font-weight: 700; }
+.payment-toolbar select { width: auto; min-width: 160px; }
+.admin-content-grid { display: grid; grid-template-columns: minmax(360px, .9fr) minmax(380px, 1.1fr); gap: 18px; align-items: start; }
+.payments-panel, .payment-detail { min-width: 0; padding: 20px; }
+.payments-panel h2, .payment-detail h2 { margin: 0 0 18px; color: #10251b; font-size: 20px; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { padding: 10px 8px; color: #68736c; font-size: 11px; letter-spacing: .4px; text-transform: uppercase; }
+td { padding: 12px 8px; border-top: 1px solid #e3e9e4; font-size: 13px; vertical-align: middle; }
+.payment-name { display: block; color: #10251b; font-weight: 700; }
+.payment-email { display: block; max-width: 200px; overflow-wrap: anywhere; margin-top: 3px; color: #68736c; font-size: 11px; }
+.status-pill { display: inline-block; padding: 5px 8px; border-radius: 999px; background: #fff3d6; color: #825600; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.status-pill.approved { background: #e4f4e9; color: #176139; }
+.view-payment { padding: 6px 9px; border: 1px solid #cbd6ce; border-radius: 4px; background: #fff; color: #167446; cursor: pointer; font-size: 12px; font-weight: 700; }
+.view-payment:hover { background: #f3f6f3; }
+.view-payment:disabled { cursor: wait; opacity: .6; }
+.delete-plan-button { margin-left: 6px; padding: 6px 9px; border: 1px solid #d7a5a5; border-radius: 4px; background: #fff; color: #a32626; cursor: pointer; font-size: 12px; font-weight: 700; }
+.delete-plan-button:hover { background: #fff3f3; }
+.delete-plan-button:disabled { cursor: wait; opacity: .6; }
+.delete-customer-button { margin-left: 6px; padding: 7px 10px; border: 1px solid #d7a5a5; border-radius: 7px; background: #fff; color: #a32626; cursor: pointer; font-size: 12px; font-weight: 700; }
+.delete-customer-button:hover { background: #fff3f3; }
+.delete-customer-button:disabled { cursor: wait; opacity: .6; }
+.empty-state { padding: 16px 0; color: #68736c; font-size: 14px; }
+
+#payment-data { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 10px 14px; margin: 0 0 18px; font-size: 13px; }
+#payment-data dt { color: #68736c; }
+#payment-data dd { min-width: 0; margin: 0; overflow-wrap: anywhere; font-weight: 600; }
+.receipt-preview { overflow: hidden; border: 1px solid #d8e0d9; border-radius: 6px; background: #f3f6f3; }
+.receipt-preview img { display: block; width: 100%; max-height: 580px; object-fit: contain; }
+.receipt-preview iframe { display: block; width: 100%; min-height: 560px; border: 0; background: #fff; }
+.receipt-download { display: inline-block; padding: 14px; color: #167446; font-size: 13px; }
+.approve-button { width: 100%; margin-top: 16px; }
+.admin-feedback { min-height: 20px; margin: 10px 0 0; color: #167446; font-size: 13px; line-height: 1.5; }
+.admin-feedback[data-kind="error"] { color: #b42318; }
+
+@media (max-width: 900px) {
+	.admin-content-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 540px) {
+	.admin-main { padding: 20px 14px; }
+	.admin-header { padding: 10px 15px; }
+	.admin-brand { gap: 8px; font-size: 13px; }
+	.admin-brand img { width: 40px; height: 40px; }
+	.back-link { font-size: 12px; }
+	.dashboard-heading { align-items: center; }
+	.payment-toolbar { flex-wrap: wrap; }
+	.payment-toolbar select { flex: 1; }
+	.register-customers-panel, .plans-panel, .payment-settings-panel, .memberships-panel, .payments-panel, .monthly-payments-panel, .payment-detail { padding: 15px; }
+	.panel-heading { align-items: flex-start; flex-direction: column; }
+	.register-customers-panel #register-customer-form { grid-template-columns: 1fr; }
+	.plans-panel #plan-form { grid-template-columns: 1fr; }
+	.plans-panel #plan-form .plan-description-field { grid-column: auto; }
+	.plans-panel #plan-form .plan-benefits-field { grid-column: auto; }
+	.payment-settings-panel #payment-settings-form { grid-template-columns: 1fr; }
+	#payment-data { grid-template-columns: 100px minmax(0, 1fr); gap: 9px; }
+	.customer-access-settings #customer-access-form { grid-template-columns: 1fr; }
+}
+
+:root {
+	color: #18251e;
+	background: #f4f6f4;
+	font-family: "Segoe UI", Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+.admin-body {
+	background-color: #10251b;
+	background-image:
+		linear-gradient(135deg, #10251bcc, #10251b99),
+		url("/images_collage/WhatsApp%20Image%202026-10-24%20at%2010.50.40%20AM.jpeg");
+	background-position: center, center;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+.admin-header {
+	min-height: 72px;
+	padding-inline: clamp(20px, 5vw, 72px);
+	border-bottom: 1px solid #ffffff20;
+	background: linear-gradient(110deg, #10251b, #18392b);
+	box-shadow: 0 8px 24px #10251b1c;
+}
+
+.admin-brand { gap: 12px; letter-spacing: 1.2px; }
+.admin-brand img { border-radius: 9px; }
+.admin-brand strong { color: #c3dd74; }
+.back-link { text-decoration-color: #ffffff60; text-underline-offset: 4px; }
+.back-link:hover { color: #fff; }
+.admin-main { width: min(1440px, 100%); padding-block: clamp(28px, 4vw, 52px); }
+
+.dashboard-heading {
+	align-items: center;
+	margin-bottom: 26px;
+	padding: 30px clamp(22px, 4vw, 42px);
+	border: 1px solid #dfe7df;
+	border-radius: 16px;
+	background: linear-gradient(120deg, #fff, #f8fbf8);
+	box-shadow: 0 14px 36px #1935230a;
+}
+
+.dashboard-heading h1 { margin: 8px 0 6px; font-size: clamp(28px, 3.2vw, 38px); letter-spacing: -1px; }
+.dashboard-heading .muted-copy { margin: 0; }
+.dashboard-heading .secondary-button { border-color: #d7e1d8; }
+
+.admin-navigation {
+	position: sticky;
+	top: 12px;
+	z-index: 3;
+	display: flex;
+	gap: 6px;
+	overflow-x: auto;
+	margin: 0 0 28px;
+	padding: 8px;
+	border: 1px solid #e0e7e0;
+	border-radius: 13px;
+	background: #ffffffed;
+	box-shadow: 0 8px 24px #19352310;
+	backdrop-filter: blur(12px);
+	scrollbar-width: thin;
+}
+
+.admin-navigation a {
+	flex: 0 0 auto;
+	padding: 10px 14px;
+	border-radius: 8px;
+	color: #536258;
+	font-size: 13px;
+	font-weight: 700;
+	text-decoration: none;
+	transition: color 150ms ease, background-color 150ms ease;
+}
+
+.admin-navigation a:hover,
+.admin-navigation a:focus-visible {
+	background: #edf4ee;
+	color: #17613c;
+	outline: none;
+}
+
+.register-customers-panel,
+.plans-panel,
+.payment-settings-panel,
+.memberships-panel,
+.payments-panel,
+.monthly-payments-panel,
+.payment-detail {
+	margin-top: 20px;
+	padding: clamp(20px, 3vw, 30px);
+	border-color: #e1e8e1;
+	border-radius: 14px;
+	box-shadow: 0 10px 30px #1935230a;
+	scroll-margin-top: 86px;
+}
+
+.register-customers-panel h2,
+.plans-panel h2,
+.payment-settings-panel h2,
+.memberships-panel h2,
+.monthly-payments-panel h2,
+.payments-panel h2,
+.payment-detail h2,
+.panel-heading h2 {
+	color: #173324;
+	font-size: 19px;
+	letter-spacing: -0.25px;
+}
+
+.panel-heading { margin-bottom: 8px; }
+.panel-heading .muted-copy { max-width: 760px; }
+.muted-copy { color: #6b776e; }
+.admin-eyebrow { color: #267348; }
+
+.customer-access-settings {
+	margin-top: 24px;
+	padding-top: 20px;
+	border-top: 1px solid #e8ede8;
+}
+
+.registered-customers {
+	margin-top: 28px;
+	padding-top: 22px;
+	border-top: 1px solid #e8ede8;
+}
+
+.registered-customers .panel-heading { align-items: center; }
+.registered-customers h3 { margin: 0; color: #173324; font-size: 16px; }
+.registered-customers .muted-copy { margin: 5px 0 0; }
+.registered-customers .customer-search { display: grid; gap: 6px; max-width: 460px; margin-top: 16px; color: #34443a; font-size: 12px; font-weight: 700; }
+.registered-customers .customer-search input { width: 100%; min-height: 42px; padding: 8px 11px; border: 1px solid #cbd6ce; border-radius: 6px; background: #fff; color: #17231c; font: inherit; font-weight: 400; }
+.registered-customers .customer-search input:focus-visible { outline: 3px solid #16744630; border-color: #167446; }
+.registered-customers .table-scroll { margin-top: 10px; }
+.registered-customers table { min-width: 1120px; }
+.registered-customers #edit-customer-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; padding: 18px; border: 1px solid #d8e0d9; border-radius: 8px; background: #f8faf8; }
+.registered-customers #edit-customer-form h3 { grid-column: 1 / -1; margin: 0; }
+.registered-customers #edit-customer-form label { display: grid; gap: 6px; font-size: 12px; font-weight: 700; }
+.registered-customers #edit-customer-form input:not([type="hidden"]) { width: 100%; min-width: 0; min-height: 42px; padding: 8px 10px; border: 1px solid #cbd6ce; border-radius: 5px; background: #fff; color: #17231c; }
+
+.customer-access-settings h3 { margin: 0; color: #173324; font-size: 15px; }
+.customer-access-settings .muted-copy { margin: 6px 0 14px; }
+.customer-access-settings #customer-access-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.customer-access-settings #customer-access-form label { display: grid; gap: 6px; color: #34443a; font-size: 12px; font-weight: 700; }
+.customer-access-settings #customer-access-form input { width: 100%; min-width: 0; min-height: 42px; padding: 8px 10px; border: 1px solid #d6dfd7; border-radius: 8px; background: #fbfcfb; }
+.customer-access-settings #customer-access-form button { align-self: end; }
+
+.admin-login-card {
+	margin-top: 8vh;
+	border-color: #e1e8e1;
+	border-radius: 16px;
+	box-shadow: 0 22px 60px #19352312;
+}
+
+.register-customers-panel #register-customer-form,
+.plans-panel #plan-form,
+.payment-settings-panel #payment-settings-form { gap: 16px; }
+
+.register-customers-panel #register-customer-form label,
+.plans-panel #plan-form label,
+.payment-settings-panel #payment-settings-form label { color: #34443a; font-size: 12px; }
+
+.register-customers-panel #register-customer-form input,
+.register-customers-panel #register-customer-form select,
+.payment-settings-panel #payment-settings-form input,
+.plans-panel #plan-form input,
+.plans-panel #plan-form select,
+.plans-panel #plan-form textarea,
+#admin-login-form input,
+.payment-toolbar select {
+	border-color: #d6dfd7;
+	border-radius: 8px;
+	background-color: #fbfcfb;
+	transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+}
+
+.register-customers-panel #register-customer-form input:focus,
+.register-customers-panel #register-customer-form select:focus,
+.payment-settings-panel #payment-settings-form input:focus,
+.plans-panel #plan-form input:focus,
+.plans-panel #plan-form select:focus,
+.plans-panel #plan-form textarea:focus,
+#admin-login-form input:focus,
+.payment-toolbar select:focus {
+	border-color: #39815a;
+	background-color: #fff;
+	box-shadow: 0 0 0 3px #39815a1a;
+	outline: none;
+}
+
+.primary-button,
+.secondary-button { min-height: 42px; border-radius: 8px; transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease; }
+.primary-button { background: #17613c; box-shadow: 0 3px 8px #17613c20; }
+.primary-button:hover { background: #10492d; }
+.primary-button:active,
+.secondary-button:active { transform: translateY(1px); }
+.secondary-button { border-color: #d6dfd7; color: #263a2d; }
+.secondary-button:hover { border-color: #b7c9ba; background: #f4f8f4; }
+
+.payment-toolbar { margin-top: 30px; }
+.payment-toolbar#payment-approvals { scroll-margin-top: 86px; }
+.payment-toolbar select { min-height: 42px; border-radius: 8px; }
+.payment-queue,
+.monthly-payments-panel { margin-bottom: 20px; }
+
+table { border-collapse: separate; border-spacing: 0; }
+th { padding: 12px 10px; background: #f6f8f6; color: #69766d; font-size: 10px; letter-spacing: .7px; }
+th:first-child { border-radius: 7px 0 0 7px; }
+th:last-child { border-radius: 0 7px 7px 0; }
+td { padding: 14px 10px; border-top-color: #edf0ed; }
+tbody tr { transition: background-color 120ms ease; }
+tbody tr:hover { background: #fafcfb; }
+.status-pill { padding: 6px 10px; }
+.view-payment,
+.delete-plan-button { padding: 7px 10px; border-radius: 7px; }
+.view-payment { border-color: #d6e2d8; color: #17613c; }
+.view-payment:hover { background: #eff6f0; }
+.membership-access-button { white-space: nowrap; }
+.membership-access-button:disabled { cursor: not-allowed; opacity: .6; }
+.membership-status { font-weight: 700; }
+.membership-status.is-overdue { color: #825600; }
+.membership-status.is-restricted { color: #a32626; }
+.plan-thumbnail { border-radius: 8px; }
+.admin-feedback { color: #28774b; }
+
+@media (max-width: 700px) {
+	.admin-navigation { top: 8px; margin-bottom: 20px; }
+	.dashboard-heading { align-items: flex-start; }
+	.dashboard-heading .secondary-button { flex: 0 0 auto; }
+}
+
+@media (max-width: 540px) {
+	.admin-main { padding: 18px 12px 30px; }
+	.admin-header { min-height: 64px; }
+	.dashboard-heading { flex-direction: column; padding: 22px; }
+	.admin-navigation { margin-inline: -2px; }
+	.register-customers-panel,
+	.plans-panel,
+	.payment-settings-panel,
+	.memberships-panel,
+	.payments-panel,
+	.monthly-payments-panel,
+	.payment-detail { padding: 18px; }
+	.customer-access-settings #customer-access-form { grid-template-columns: 1fr; }
+	.registered-customers #edit-customer-form { grid-template-columns: 1fr; }
+	.registered-customers #edit-customer-form h3 { grid-column: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+	.admin-navigation a,
+	.primary-button,
+	.secondary-button,
+	tbody tr { transition: none; }
+}

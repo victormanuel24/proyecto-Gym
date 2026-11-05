@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#10251b">
+	<title>🏋️ Inicio | Esmeralda Gym</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+	<div class="gym-layout">
+		<aside class="sidebar" aria-label="Menú de Esmeralda Gym">
+			<a class="brand" href="#inicio" aria-label="Esmeralda Gym, inicio">
+				<span class="brand-image">
+					<img src="/images/images.jpg" alt="Logotipo de Esmeralda Gym">
+				</span>
+				<span class="brand-name">Esmeralda Gym</span>
+			</a>
+
+			<p class="sidebar-message">Tu cuerpo es el único templo donde vivirás toda la vida. Entrénalo al máximo.</p>
+
+			<nav class="sidebar-nav" aria-label="Navegación principal">
+				<a class="nav-link" href="#inicio" aria-current="page"><span class="nav-marker"></span>Inicio</a>
+				<a class="nav-link" href="#galeria"><span class="nav-marker"></span>Galería</a>
+				<a class="nav-link" href="#staff"><span class="nav-marker"></span>Staff del Gym</a>
+				<a class="nav-link" href="#motivacion"><span class="nav-marker"></span>Motivación</a>
+				<a class="nav-link" href="https://www.instagram.com/esmeraldagym?dlrf=aG9rcXpsbG5ueDJh" target="_blank" rel="noopener noreferrer"><span class="nav-marker"></span>Instagram del Gym</a>
+				<button class="nav-link customer-login-button" id="customer-login-toggle" type="button">
+					<span class="nav-marker"></span><span id="customer-login-label">Iniciar sesión</span>
+				</button>
+				<div class="nav-group">
+					<button class="nav-link nav-toggle" id="membership-toggle" type="button" aria-expanded="false" aria-controls="membership-options">
+						<span class="nav-marker"></span>Mensualidad<span class="nav-chevron" aria-hidden="true">+</span>
+					</button>
+					<div class="nav-submenu" id="membership-options" hidden>
+						<button class="nav-sublink" type="button" id="membership-option">Pagar mensualidad</button>
+					</div>
+				</div>
+			</nav>
+
+			<p class="sidebar-footer">FUERZA <span>·</span> CONSTANCIA <span>·</span> BIENESTAR</p>
+		</aside>
+
+		<main class="main-content" id="inicio">
+			<header class="page-heading">
+				<p class="eyebrow">ESMERALDA GYM <span>/</span> TU ESPACIO</p>
+				<p class="member-greeting" id="member-greeting">Hola, atleta</p>
+				<h1>Entrena con fuerza,<br>disciplina y constancia.</h1>
+				<p class="heading-copy">Más que un gimnasio: un espacio para potenciar tu cuerpo, tu energía y tu confianza cada día.</p>
+				<div class="hero-actions">
+					<a class="primary-cta" href="#planes-disponibles">Elige tu plan</a>
+					<a class="secondary-cta whatsapp-cta" href="https://wa.me/584127412211?text=Hola%20Esmeralda%20Gym%2C%20quiero%20consultar%20mi%20plan" target="_blank" rel="noopener noreferrer">Habla por WhatsApp</a>
+				</div>
+			</header>
+
+			<%
+				const planMarketingDetails = {
+					"Plan Diurno": {
+						benefits: [
+							"Más energía y productividad para el día a día",
+							"Ayuda a reducir el estrés y mejorar el estado de ánimo",
+							"Mejora la calidad del sueño y el descanso nocturno",
+						],
+						conditions: "Lun–vie: 6:00 a. m.–5:00 p. m. · sáb: 7:00 a. m.–2:00 p. m.",
+					},
+					"Plan Parejas": {
+						benefits: [
+							"Motivación mutua y mayor compromiso",
+							"Mejora la comunicación y el trabajo en equipo",
+							"Favorece la salud general y la calidad de vida",
+						],
+						conditions: "Lun–vie: 6:00 a. m.–10:00 p. m. · sáb: 7:00 a. m.–2:00 p. m.",
+					},
+					"Plan Semanal": {
+						benefits: [
+							"Aumenta la fuerza y la masa muscular",
+							"Mejora la resistencia y el rendimiento físico",
+							"Disciplina, enfoque y resultados reales",
+						],
+						conditions: "Válido por una semana · lun–vie: 6:00 a. m.–10:00 p. m. · sáb: 7:00 a. m.–2:00 p. m.",
+					},
+					"Plan Estudiantil": {
+						benefits: [
+							"Mejora la concentración y el rendimiento académico",
+							"Ayuda a reducir el estrés y la ansiedad",
+							"Aumenta la energía y la autoestima",
+						],
+						conditions: "Hasta 25 años · lun–vie: 6:00 a. m.–5:00 p. m. · sáb: 7:00 a. m.–2:00 p. m.",
+					},
+					"Plan Kids": {
+						benefits: [
+							"Entrenamiento adaptado a su edad",
+							"Desarrolla fuerza y coordinación",
+							"Mejora la condición física y la salud",
+							"Fomenta disciplina, confianza y trabajo en equipo",
+							"Supervisión profesional",
+						],
+						conditions: "Para niños y niñas de 6 a 12 años · lun–vie: 6:00 a. m.–5:00 p. m. · sáb: 7:00 a. m.–2:00 p. m.",
+					},
+					"Plan Full Time": {
+						benefits: [
+							"Aumenta la fuerza y la masa muscular",
+							"Mejora la resistencia y el rendimiento físico",
+							"Disciplina, enfoque y resultados reales",
+						],
+						conditions: "Lun–vie: 6:00 a. m.–10:00 p. m. · sáb: 7:00 a. m.–2:00 p. m.",
+					},
+				};
+			%>
+			<section class="motivation-section" id="motivacion" aria-labelledby="motivation-title">
+				<p class="section-label">01 <span>·</span> CONSTANCIA</p>
+				<h2 id="motivation-title">Cada entrenamiento te acerca a tu mejor versión.</h2>
+				<p>No necesitas tener todo resuelto para comenzar: solo dar el primer paso y volver a intentarlo cada día. Aquí encontrarás el espacio, la guía y la energía para avanzar a tu ritmo. Tu esfuerzo de hoy construye la fuerza y la confianza de mañana.</p>
+				<a class="primary-cta compact-cta" href="#planes-disponibles">Consulta tu plan</a>
+			</section>
+
+			<section class="gallery-section" id="galeria" aria-labelledby="gallery-title">
+				<div class="gallery-heading">
+					<div>
+						<p class="section-label">ESMERALDA GYM <span>·</span> NUESTRA GALERÍA</p>
+						<h2 id="gallery-title">Un espacio para sentirte bien.</h2>
+						<p>Conoce un poco más de Esmeralda Gym y encuentra la inspiración para seguir avanzando.</p>
+					</div>
+					<p class="gallery-count" id="gallery-count" aria-live="polite">1 / 5</p>
+				</div>
+				<div class="gallery-carousel" role="region" aria-roledescription="carrusel" aria-label="Galería de Esmeralda Gym" tabindex="0">
+					<div class="gallery-slides">
+						<figure class="gallery-slide" role="group" aria-roledescription="diapositiva" aria-label="1 de 5">
+							<img src="/images_collage/WhatsApp%20Image%202026-11-04%20at%205.07.23%20PM.jpeg" alt="Vista amplia del área de entrenamiento de Esmeralda Gym">
+							<figcaption>Un espacio para entrenar y avanzar.</figcaption>
+						</figure>
+						<figure class="gallery-slide" role="group" aria-roledescription="diapositiva" aria-label="2 de 5" hidden>
+							<img src="/images_collage/image.jpeg" alt="Equipos de fuerza disponibles para entrenar en el gimnasio" loading="lazy" decoding="async">
+							<figcaption>Equipamiento para cada objetivo.</figcaption>
+						</figure>
+						<figure class="gallery-slide" role="group" aria-roledescription="diapositiva" aria-label="3 de 5" hidden>
+							<img src="/images_collage/images%202.jpeg" alt="Zona de entrenamiento con máquinas y equipos de gimnasio" loading="lazy" decoding="async">
+							<figcaption>Entrena a tu ritmo, supera tus límites.</figcaption>
+						</figure>
+						<figure class="gallery-slide" role="group" aria-roledescription="diapositiva" aria-label="4 de 5" hidden>
+							<img src="/images_collage/WhatsApp%20Image%202026-10-24%20at%2010.50.40%20AM.jpeg" alt="Fachada de Esmeralda Gym con su logotipo" loading="lazy" decoding="async">
+							<figcaption>Esmeralda Gym, un lugar para crecer.</figcaption>
+						</figure>
+						<figure class="gallery-slide" role="group" aria-roledescription="diapositiva" aria-label="5 de 5" hidden>
+							<img src="/images_collage/WhatsApp%20Image%202026-10-23%20at%205.45.02%20PM.jpeg" alt="Letrero iluminado que invita a cuidar el cuerpo" loading="lazy" decoding="async">
+							<figcaption>Cuida de ti. Tu bienestar va primero.</figcaption>
+						</figure>
+					</div>
+					<button class="gallery-control gallery-previous" type="button" aria-label="Imagen anterior"><span aria-hidden="true">←</span></button>
+					<button class="gallery-control gallery-next" type="button" aria-label="Imagen siguiente"><span aria-hidden="true">→</span></button>
+				</div>
+				<div class="gallery-footer">
+					<div class="gallery-indicators" role="group" aria-label="Elegir imagen">
+						<button class="gallery-indicator active" type="button" aria-label="Mostrar imagen 1" aria-pressed="true"></button>
+						<button class="gallery-indicator" type="button" aria-label="Mostrar imagen 2" aria-pressed="false"></button>
+						<button class="gallery-indicator" type="button" aria-label="Mostrar imagen 3" aria-pressed="false"></button>
+						<button class="gallery-indicator" type="button" aria-label="Mostrar imagen 4" aria-pressed="false"></button>
+						<button class="gallery-indicator" type="button" aria-label="Mostrar imagen 5" aria-pressed="false"></button>
+					</div>
+					<p>Cambia cada 5 segundos · Usa las flechas para explorar.</p>
+				</div>
+			</section>
+
+			<section class="location-section" aria-labelledby="location-title">
+				<p class="section-label">ENCUÉNTRANOS</p>
+				<h2 id="location-title">Visita Esmeralda Gym.</h2>
+				<iframe
+					class="location-map"
+					src="https://www.google.com/maps?q=10.4717738,-66.5561967&z=16&output=embed"
+					title="Ubicación de Esmeralda Gym en Google Maps"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					allowfullscreen>
+				</iframe>
+				<a class="location-link" href="https://maps.app.goo.gl/SP2Q15S3FfmaLFJs7" target="_blank" rel="noopener noreferrer">Abrir ubicación en Google Maps <span aria-hidden="true">↗</span></a>
+			</section>
+
+			<%
+				const coaches = [
+					{
+						name: "Samuel",
+						image: "coach%20samuel.jpeg",
+						schedule: "Lunes a viernes · 2:00 p. m. – 10:00 p. m.",
+						credentials: [
+							"Crecimiento muscular, flexibilidad y entrenamiento funcional.",
+							"Preparación de atletas de alto rendimiento en básquet, natación y béisbol.",
+							"Jugador activo de béisbol del estado Miranda.",
+							"Curso de control de hemorragias y primeros auxilios, American College of Surgeons.",
+						],
+					},
+					{
+						name: "Gabriel",
+						image: "coach%20grabriel.jpeg",
+						schedule: "Lunes a viernes · 6:00 a. m. – 2:00 p. m.",
+						credentials: [
+							"Especialidad en glúteos IFBB y ejercicio funcional WittPower.",
+							"Formación en fisiología, nutrición y psicología deportiva.",
+							"Monitor de sala de musculación FVFC y formación en biomecánica deportiva.",
+							"Entrenamiento de fuerza explosiva y primeros auxilios.",
+						],
+					},
+					{
+						name: "Daniel",
+						image: "coach%20daniel.jpeg",
+						schedule: "Lunes a viernes · 2:00 p. m. – 10:00 p. m.",
+						credentials: [
+							"Personal trainer en sala de musculación y nutrición deportiva.",
+							"Biomecánica deportiva (FVFC) y preparación física de atletas de alto rendimiento.",
+							"Enfoque en control de peso y reducción de grasa corporal.",
+							"Antropometrista ISAK 1 en cineantropometría y primeros auxilios.",
+						],
+					},
+					{
+						name: "Alexis",
+						image: "coach%20Alexis.jpeg",
+						schedule: "Lunes a viernes · 2:00 p. m. – 10:00 p. m.",
+						credentials: [
+							"Promotor técnico en deporte y recreación para la salud.",
+							"Entrenador de musculación y entrenador personal de funcionales.",
+							"Biomecánica y fisiología deportiva; aplicación al fitness y culturismo.",
+							"Sensei de karate kempo, segundo dan, y primeros auxilios.",
+						],
+					},
+					{
+						name: "Keiber",
+						image: "coach%20keiber.jpeg",
+						schedule: "Lunes a viernes · 6:00 a. m. – 2:00 p. m.",
+						credentials: [
+							"Fisioterapeuta: readaptación física, descarga muscular y stretching deportivo.",
+							"Personal trainer y entrenador funcional grupal y de circuito.",
+							"Preparador físico de prospectos y atletas de alto rendimiento.",
+							"Certificaciones en fuerza, agilidad, coordinación y entrenamiento funcional.",
+						],
+					},
+					{
+						name: "José",
+						image: "coach%20jose.jpeg",
+						schedule: "Lunes a viernes · 2:00 p. m. – 10:00 p. m.",
+						credentials: [
+							"Personal trainer y entrenamiento en sala de musculación.",
+							"Nutrición deportiva y entrenamiento enfocado en hipertrofia.",
+							"Curso de control de hemorragias y primeros auxilios, American College of Surgeons.",
+						],
+					},
+					{
+						name: "Michelle",
+						image: "coach%20michelle.jpeg",
+						schedule: "Lunes a viernes · 6:00 a. m. – 2:00 p. m.",
+						credentials: [
+							"Atleta Wellness IFBB y entrenadora de musculación y fitness.",
+							"Entrenamiento especializado en glúteos y para mujeres.",
+							"Nutrición y suplementación orientadas al desarrollo muscular.",
+							"Entrenamiento para aumento de masa muscular y reducción de grasa.",
+						],
+					},
+				];
+			%>
+			<section class="staff-section" id="staff" aria-labelledby="staff-title">
+				<div class="staff-heading">
+					<div>
+						<p class="section-label">02 <span>·</span> CONOCE AL EQUIPO</p>
+						<h2 id="staff-title">Staff del Gym</h2>
+						<p>Un equipo preparado para acompañarte en cada etapa de tu entrenamiento.</p>
+					</div>
+					<span class="staff-count"><%= coaches.length %> ENTRENADORES</span>
+				</div>
+				<div class="staff-grid">
+					<% coaches.forEach((coach) => { %>
+						<article class="coach-card">
+							<div class="coach-photo">
+								<img src="/images.coachs/<%= coach.image %>" alt="Foto del entrenador <%= coach.name %>" loading="lazy" decoding="async">
+							</div>
+							<div class="coach-details">
+								<p class="coach-role">ENTRENADOR</p>
+								<h3><%= coach.name %></h3>
+								<p class="coach-list-label">Ficha técnica</p>
+								<ul class="coach-credentials">
+									<% coach.credentials.forEach((credential) => { %>
+										<li><%= credential %></li>
+									<% }); %>
+								</ul>
+								<p class="coach-schedule"><span aria-hidden="true">◷</span><span><strong>Horario fijo de atención</strong><br><%= coach.schedule %></span></p>
+							</div>
+						</article>
+					<% }); %>
+				</div>
+			</section>
+
+			<section class="plans-showcase" id="planes-disponibles" aria-labelledby="plans-showcase-title">
+				<div class="plans-showcase-header">
+					<div>
+						<p class="section-label">MEMBRESÍAS</p>
+						<h2 id="plans-showcase-title">Encuentra la membresía ideal para tu estilo de vida</h2>
+					</div>
+				</div>
+				<div class="plans-showcase-grid">
+					<% availablePlans.forEach((plan) => { %>
+						<% const planDetails = planMarketingDetails[plan.name]; %>
+						<article class="showcase-plan-card">
+							<div class="showcase-plan-image-wrap">
+								<img src="<%= plan.imageUrl %>" alt="<%= plan.name %> de Esmeralda Gym" loading="lazy">
+							</div>
+							<div class="showcase-plan-content">
+								<div class="showcase-plan-top">
+									<h3><%= plan.name %></h3>
+									<span class="plan-tag"><%= plan.period %></span>
+								</div>
+								<p class="showcase-plan-description"><%= plan.description %></p>
+								<div class="showcase-price">
+									<span><%= plan.period === "Semana" ? "Precio semanal" : "Mensualidad" %></span>
+									<strong>$<%= Number(plan.membershipFee).toFixed(2) %></strong>
+									<small>USD / <%= plan.period === "Semana" ? "semana" : "mes" %></small>
+								</div>
+								<% if (Number(plan.enrollmentFee) > 0) { %>
+									<p class="showcase-enrollment">Inscripción: <strong>$<%= Number(plan.enrollmentFee).toFixed(2) %> USD</strong></p>
+								<% } else { %>
+									<p class="showcase-enrollment">Sin costo de inscripción</p>
+								<% } %>
+								<% if (planDetails) { %>
+									<p class="showcase-plan-condition"><%= planDetails.conditions %></p>
+								<% } %>
+								<p class="showcase-benefits-label">Beneficios del plan</p>
+								<ul class="showcase-benefits">
+									<% const planBenefits = plan.benefits?.length ? plan.benefits : (planDetails?.benefits || []); %>
+									<% if (planBenefits.length) { %>
+										<% planBenefits.forEach((benefit) => { %>
+											<li><%= benefit %></li>
+										<% }); %>
+									<% } else { %>
+										<li>Consulta por WhatsApp los beneficios y condiciones de este plan.</li>
+									<% } %>
+								</ul>
+								<button class="plan-select-button plan-showcase-button" type="button" aria-pressed="false" data-plan-name="<%= plan.name %>">Seleccionar este plan</button>
+							</div>
+						</article>
+					<% }); %>
+				</div>
+				<p class="plan-selection-feedback" id="plan-selection-feedback" role="status" aria-live="polite"></p>
+				<p class="plan-selection-total" id="plan-selection-total" aria-live="polite" hidden></p>
+				<a class="secondary-cta whatsapp-cta compact-cta registration-whatsapp-link" id="registration-whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Consultar mi plan por WhatsApp</a>
+			</section>
+
+			<section class="registration-section customer-login-section" id="customer-login-panel" aria-labelledby="customer-login-title" hidden>
+				<p class="section-label">ACCESO DE CLIENTES</p>
+				<h2 id="customer-login-title">Iniciar sesión</h2>
+				<p class="registration-message">Usa el correo y la contraseña que te asignaron al registrarte en el gimnasio.</p>
+				<form class="payment-form" id="customer-login-form">
+					<label class="payment-field" for="customer-login-email">
+						<span>Correo electrónico</span>
+						<input id="customer-login-email" name="email" type="email" autocomplete="username" maxlength="254" required>
+					</label>
+					<label class="payment-field" for="customer-login-password">
+						<span>Contraseña</span>
+						<input id="customer-login-password" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="72" required>
+					</label>
+					<button class="payment-button" type="submit">Entrar</button>
+					<p class="payment-feedback" id="customer-login-feedback" role="status" aria-live="polite"></p>
+				</form>
+			</section>
+
+			<section class="registration-section membership-section" id="membership-panel" aria-labelledby="membership-title" hidden>
+				<p class="section-label">03 <span>·</span> MENSUALIDAD</p>
+				<h2 id="membership-title">Mensualidad</h2>
+				<p class="registration-message">Tu cuenta cargará automáticamente el plan mensual con el que te registraron.</p>
+				<p class="membership-price" id="registered-plan-feedback" role="status" aria-live="polite"></p>
+				<p class="membership-alert" id="membership-overdue-warning" role="alert" hidden></p>
+				<p class="membership-access-status" id="membership-access-status" role="status" aria-live="polite" hidden></p>
+				<select id="membership-plan" aria-label="Plan mensual afiliado" hidden>
+					<option value="">Inicia sesión para cargar tu plan</option>
+				</select>
+				<p class="membership-price" id="membership-price" role="status" aria-live="polite">Inicia sesión para ver tu plan y su precio.</p>
+				<button class="payment-button" id="membership-payment-button" type="button" hidden>Pagar mensualidad</button>
+				<form class="payment-form" id="membership-payment-form" hidden>
+					<h4>Enviar comprobante de mensualidad</h4>
+					<p class="membership-payment-amount" id="membership-payment-amount"></p>
+					<p class="payment-method">Método de pago: <strong>Pago Móvil</strong></p>
+					<p class="payment-rate-notice">
+						<span>Los pagos se realizan a la tasa del Banco Central de Venezuela (BCV).</span>
+						<span id="bcv-rate-display" role="status" aria-live="polite">Consultando la tasa oficial del BCV...</span>
+					</p>
+					<div class="payment-mobile-details" aria-label="Datos de Pago Móvil">
+						<p><strong>Banco:</strong> <%= paymentSettings.bankName %> (<%= paymentSettings.bankCode %>)</p>
+						<p><strong>C.I/RIF:</strong> <%= paymentSettings.documentId %></p>
+						<p><strong>Teléfono:</strong> <%= paymentSettings.phone %></p>
+					</div>
+					<label class="payment-field" for="membership-payment-date">
+						<span>Fecha de pago</span>
+						<input id="membership-payment-date" name="paymentDate" type="date" required>
+					</label>
+					<label class="payment-field" for="membership-customer-name">
+						<span>Nombre</span>
+						<input id="membership-customer-name" name="name" type="text" autocomplete="name" maxlength="100" readonly required>
+					</label>
+					<label class="payment-field" for="membership-customer-email">
+						<span>Correo electrónico del cliente</span>
+						<input id="membership-customer-email" name="email" type="email" autocomplete="email" maxlength="254" readonly required>
+					</label>
+					<label class="payment-field" for="membership-customer-phone">
+						<span>Número telefónico</span>
+						<input id="membership-customer-phone" name="phone" type="tel" autocomplete="tel" maxlength="20" pattern="[0-9+() .-]{7,20}" readonly required>
+					</label>
+					<label class="payment-field" for="membership-payment-proof">
+						<span>Comprobante de pago (imagen o PDF, máximo 8 MB)</span>
+						<input id="membership-payment-proof" name="receipt" type="file" accept="image/jpeg,image/png,application/pdf" required>
+					</label>
+					<button class="payment-button" id="submit-membership-payment" type="submit">Enviar comprobante</button>
+					<p class="payment-feedback" id="membership-payment-feedback" role="status" aria-live="polite"></p>
+				</form>
+			</section>
+
+			<section class="cta-strip" aria-labelledby="contact-cta-title">
+				<div class="cta-strip-copy">
+					<p class="section-label">HABLEMOS</p>
+					<h2 id="contact-cta-title">¿Tienes dudas? Estamos aquí para ayudarte a elegir el mejor plan.</h2>
+				</div>
+				<a class="primary-cta whatsapp-cta" href="https://wa.me/584127412211?text=Hola%20Esmeralda%20Gym%2C%20quiero%20consultar%20mi%20plan" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
+			</section>
+
+			<footer class="page-footer">
+				<a class="admin-menu-link" href="/admin">Menú administrativo</a>
+			</footer>
+		</main>
+	</div>
+	<a class="whatsapp-float" href="https://wa.me/584127412211?text=Hola%20Esmeralda%20Gym%2C%20quiero%20consultar%20mi%20plan" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">WhatsApp</a>
+	<script src="/js/api.js"></script>
+	<script id="available-plans-data" type="application/json"><%- availablePlansJson %></script>
+	<script>
+		const availablePlans = JSON.parse(document.querySelector("#available-plans-data").textContent);
+		const customerLoginToggle = document.querySelector("#customer-login-toggle");
+		const customerLoginPanel = document.querySelector("#customer-login-panel");
+		const customerLoginForm = document.querySelector("#customer-login-form");
+		const customerLoginFeedback = document.querySelector("#customer-login-feedback");
+		const customerLoginLabel = document.querySelector("#customer-login-label");
+		let customerSession = null;
+		let customerToken = sessionStorage.getItem("customerToken");
+		const membershipToggle = document.querySelector("#membership-toggle");
+		const membershipOptions = document.querySelector("#membership-options");
+		const membershipPanel = document.querySelector("#membership-panel");
+		const membershipPlan = document.querySelector("#membership-plan");
+		const membershipPrice = document.querySelector("#membership-price");
+		const membershipPaymentButton = document.querySelector("#membership-payment-button");
+		const membershipPaymentForm = document.querySelector("#membership-payment-form");
+		const registeredPlanFeedback = document.querySelector("#registered-plan-feedback");
+		const membershipOverdueWarning = document.querySelector("#membership-overdue-warning");
+		const membershipAccessStatus = document.querySelector("#membership-access-status");
+		const membershipPaymentDate = document.querySelector("#membership-payment-date");
+		const membershipPaymentProof = document.querySelector("#membership-payment-proof");
+		const membershipPaymentFeedback = document.querySelector("#membership-payment-feedback");
+		const submitMembershipPaymentButton = document.querySelector("#submit-membership-payment");
+		const bcvRateDisplay = document.querySelector("#bcv-rate-display");
+		let currentBcvRate = null;
+		const planSelectionFeedback = document.querySelector("#plan-selection-feedback");
+		const planSelectionTotal = document.querySelector("#plan-selection-total");
+		const registrationWhatsappLink = document.querySelector("#registration-whatsapp-link");
+		const gallery = document.querySelector(".gallery-carousel");
+		const gallerySlides = [...document.querySelectorAll(".gallery-slide")];
+		const galleryIndicators = [...document.querySelectorAll(".gallery-indicator")];
+		const galleryCount = document.querySelector("#gallery-count");
+		let currentGallerySlide = 0;
+		let galleryTimer;
+		let storedPlanNames = [];
+		try {
+			const parsedPlanNames = JSON.parse(localStorage.getItem("selectedPlanNames") || "[]");
+			if (Array.isArray(parsedPlanNames)) storedPlanNames = parsedPlanNames;
+		} catch {
+			localStorage.removeItem("selectedPlanNames");
+		}
+		let selectedPlanNames = storedPlanNames.filter((name) => availablePlans.some((plan) => plan.name === name));
+		const legacySelectedPlan = localStorage.getItem("selectedPlanName") || "";
+		if (!selectedPlanNames.length && availablePlans.some((plan) => plan.name === legacySelectedPlan)) {
+			selectedPlanNames = [legacySelectedPlan];
+		}
+		let selectedPlanName = selectedPlanNames.includes(legacySelectedPlan)
+			? legacySelectedPlan
+			: selectedPlanNames.at(-1) || "";
+		selectedPlanNames = [...new Set(selectedPlanNames)];
+		if (!selectedPlanName) localStorage.removeItem("selectedPlanName");
+
+		membershipPaymentDate.max = new Date().toISOString().slice(0, 10);
+		availablePlans.forEach((plan) => {
+			const option = document.createElement("option");
+			option.value = plan.name;
+			option.textContent = plan.name;
+			membershipPlan.append(option);
+		});
+		if (selectedPlanNames.length) {
+			updateRegistrationSelection();
+			updateMembershipPrice();
+		}
+
+		function showGallerySlide(index) {
+			currentGallerySlide = (index + gallerySlides.length) % gallerySlides.length;
+			gallerySlides.forEach((slide, slideIndex) => {
+				const active = slideIndex === currentGallerySlide;
+				slide.hidden = !active;
+				slide.setAttribute("aria-label", `${slideIndex + 1} de ${gallerySlides.length}`);
+				galleryIndicators[slideIndex].classList.toggle("active", active);
+				galleryIndicators[slideIndex].setAttribute("aria-pressed", String(active));
+			});
+			galleryCount.textContent = `${currentGallerySlide + 1} / ${gallerySlides.length}`;
+		}
+
+		function stopGalleryAutoplay() {
+			window.clearInterval(galleryTimer);
+		}
+
+		function startGalleryAutoplay() {
+			stopGalleryAutoplay();
+			if (window.matchMedia("(prefers-reduced-motion: reduce)").matches
+				|| gallery.matches(":hover")
+				|| gallery.contains(document.activeElement)
+				|| document.hidden) return;
+			galleryTimer = window.setInterval(() => showGallerySlide(currentGallerySlide + 1), 5000);
+		}
+
+		gallery.querySelector(".gallery-previous").addEventListener("click", () => {
+			showGallerySlide(currentGallerySlide - 1);
+			startGalleryAutoplay();
+		});
+		gallery.querySelector(".gallery-next").addEventListener("click", () => {
+			showGallerySlide(currentGallerySlide + 1);
+			startGalleryAutoplay();
+		});
+		galleryIndicators.forEach((indicator, index) => {
+			indicator.addEventListener("click", () => {
+				showGallerySlide(index);
+				startGalleryAutoplay();
+			});
+		});
+		gallery.addEventListener("pointerenter", stopGalleryAutoplay);
+		gallery.addEventListener("pointerleave", startGalleryAutoplay);
+		gallery.addEventListener("focusin", stopGalleryAutoplay);
+		gallery.addEventListener("focusout", (event) => {
+			if (!gallery.contains(event.relatedTarget)) startGalleryAutoplay();
+		});
+		document.addEventListener("visibilitychange", () => {
+			if (document.hidden) stopGalleryAutoplay();
+			else startGalleryAutoplay();
+		});
+		startGalleryAutoplay();
+
+		function updateRegistrationSelection() {
+			const selectedPlans = availablePlans.filter((plan) => selectedPlanNames.includes(plan.name));
+			const total = selectedPlans.reduce((sum, plan) => sum + Number(plan.enrollmentFee) + Number(plan.membershipFee), 0);
+			document.querySelectorAll(".plan-select-button").forEach((button) => {
+				const selected = selectedPlanNames.includes(button.dataset.planName);
+				button.setAttribute("aria-pressed", String(selected));
+				button.textContent = selected ? "Quitar plan" : "Seleccionar este plan";
+			});
+			planSelectionFeedback.textContent = selectedPlans.length
+				? `Planes seleccionados: ${selectedPlans.map((plan) => plan.name).join(", ")}.`
+				: "Selecciona uno o varios planes para continuar.";
+			planSelectionTotal.hidden = selectedPlans.length === 0;
+			planSelectionTotal.textContent = selectedPlans.length
+				? `Total exacto de inscripción y primer período: $${total.toFixed(2)} USD`
+				: "";
+			registrationWhatsappLink.hidden = selectedPlans.length === 0;
+			if (selectedPlans.length) {
+				const planSummary = selectedPlans.map((plan) =>
+					`- ${plan.name}: inscripción $${Number(plan.enrollmentFee).toFixed(2)} USD; ${plan.period === "Semana" ? "precio semanal" : "mensualidad"} $${Number(plan.membershipFee).toFixed(2)} USD`
+				).join("\n");
+				const message = `Hola, Esmeralda Gym. Estoy interesado/a en inscribirme y seleccioné estos planes:\n${planSummary}\nMonto total exacto de inscripción y primer período: $${total.toFixed(2)} USD.\n¿Me pueden indicar los pasos para formalizar mi inscripción?`;
+				registrationWhatsappLink.href = `https://wa.me/584127412211?text=${encodeURIComponent(message)}`;
+			} else {
+				registrationWhatsappLink.removeAttribute("href");
+			}
+			localStorage.setItem("selectedPlanNames", JSON.stringify(selectedPlanNames));
+			if (selectedPlanName) localStorage.setItem("selectedPlanName", selectedPlanName);
+		}
+
+		function updateMembershipPrice() {
+			const plan = availablePlans.find((item) => item.name === membershipPlan.value);
+			const assignedMonthlyPlan = Boolean(customerSession
+				&& customerSession.planName === plan?.name
+				&& customerSession.planPeriod === "Mensualidad"
+				&& plan.period === "Mensualidad");
+			membershipPrice.textContent = !customerSession
+				? "Inicia sesión para ver el plan afiliado."
+				: customerSession.planPeriod !== "Mensualidad"
+					? `Tu plan afiliado, ${customerSession.planName || "actual"}, no incluye pagos mensuales.`
+					: assignedMonthlyPlan
+				? `Precio de ${plan.name}: $${Number(plan.membershipFee).toFixed(2)} USD / ${plan.period}.`
+				: "Tu plan registrado no está disponible. Contacta al gimnasio para actualizar tu afiliación.";
+			membershipPaymentButton.hidden = !assignedMonthlyPlan;
+			membershipPaymentForm.hidden = true;
+			const paymentAmount = document.querySelector("#membership-payment-amount");
+			if (plan && assignedMonthlyPlan) {
+				const amountUsd = Number(plan.membershipFee);
+				const amountBs = currentBcvRate ? amountUsd * currentBcvRate.rate : null;
+				paymentAmount.textContent = amountBs
+					? `Monto a pagar: $${amountUsd.toFixed(2)} USD · Bs. ${new Intl.NumberFormat("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amountBs)}`
+					: `Monto a pagar: $${amountUsd.toFixed(2)} USD`;
+			} else {
+				paymentAmount.textContent = "";
+			}
+		}
+
+		async function loadBcvRate() {
+			const paymentFormWasVisible = !membershipPaymentForm.hidden;
+			bcvRateDisplay.textContent = "Consultando la tasa oficial del BCV...";
+			bcvRateDisplay.dataset.kind = "loading";
+			try {
+				currentBcvRate = await window.apiRequest("/bcv-rate", { cache: "no-store" });
+				const formattedRate = new Intl.NumberFormat("es-VE", {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 4,
+				}).format(currentBcvRate.rate);
+				const fetchedAt = new Intl.DateTimeFormat("es-VE", {
+					dateStyle: "short",
+					timeStyle: "short",
+					timeZone: "America/Caracas",
+				}).format(new Date(currentBcvRate.fetchedAt));
+				bcvRateDisplay.textContent = `Tasa oficial: Bs. ${formattedRate} por USD · Fecha valor: ${currentBcvRate.valueDate} · Consultada: ${fetchedAt}.${currentBcvRate.stale ? " No se pudo actualizar; esta es la última tasa consultada." : ""}`;
+				bcvRateDisplay.dataset.kind = currentBcvRate.stale ? "stale" : "current";
+			} catch {
+				currentBcvRate = null;
+				bcvRateDisplay.textContent = "No se pudo consultar la tasa oficial del BCV. Confirma la tasa vigente antes de pagar.";
+				bcvRateDisplay.dataset.kind = "error";
+			}
+			updateMembershipPrice();
+			if (paymentFormWasVisible) membershipPaymentForm.hidden = false;
+		}
+
+		function formatMembershipDate(value) {
+			const [year, month, day] = String(value).slice(0, 10).split("-").map(Number);
+			return new Intl.DateTimeFormat("es-VE", {
+				day: "numeric",
+				month: "long",
+				year: "numeric",
+				timeZone: "UTC",
+			}).format(new Date(Date.UTC(year, month - 1, day)));
+		}
+
+		function setCustomerSession(customer, token = customerToken) {
+			customerSession = customer;
+			customerToken = customer ? token : null;
+			if (customer && token) sessionStorage.setItem("customerToken", token);
+			else sessionStorage.removeItem("customerToken");
+
+			customerLoginLabel.textContent = customer ? "Cerrar sesión" : "Iniciar sesión";
+			document.querySelector("#member-greeting").textContent = customer
+				? `Hola, ${customer.name}`
+				: "Hola, atleta";
+			customerLoginPanel.hidden = true;
+			membershipPaymentForm.hidden = true;
+
+			if (customer) {
+				membershipPlan.value = customer.planName || "";
+				membershipPaymentForm.elements.name.value = customer.name || "";
+				membershipPaymentForm.elements.email.value = customer.email || "";
+				membershipPaymentForm.elements.phone.value = customer.phone || "";
+				registeredPlanFeedback.textContent = customer.planName
+					? `Tu afiliación registrada: ${customer.planName}.`
+					: "Tu cuenta no tiene un plan asignado. Contacta al gimnasio.";
+				membershipOverdueWarning.hidden = !customer.daysOverdue;
+				membershipOverdueWarning.textContent = customer.daysOverdue
+					? `Tu mensualidad venció el ${formatMembershipDate(customer.nextDueDate)} y tienes ${customer.daysOverdue} día(s) de mora. Realiza el pago y envía el comprobante desde esta sección para regularizar tu afiliación.`
+					: "";
+				membershipAccessStatus.hidden = !customer.accessRestricted;
+				membershipAccessStatus.textContent = customer.accessRestricted
+					? "El acceso a las instalaciones y los beneficios de tu plan están temporalmente restringidos. Después de verificar tu pago, la administración deberá habilitarlos manualmente."
+					: "";
+			} else {
+				membershipPlan.value = "";
+				membershipPaymentForm.reset();
+				registeredPlanFeedback.textContent = "Inicia sesión para cargar tu plan afiliado.";
+				membershipOverdueWarning.hidden = true;
+				membershipOverdueWarning.textContent = "";
+				membershipAccessStatus.hidden = true;
+				membershipAccessStatus.textContent = "";
+			}
+			updateMembershipPrice();
+		}
+
+		loadBcvRate();
+
+		async function restoreCustomerSession() {
+			if (!customerToken) return;
+			try {
+				const data = await window.apiRequest("/customer-membership-plan", {
+					headers: { Authorization: `Bearer ${customerToken}` },
+					cache: "no-store",
+				});
+				setCustomerSession(data.customer, customerToken);
+			} catch {
+				setCustomerSession(null);
+				customerLoginFeedback.textContent = "No se pudo restaurar la sesión. Inicia sesión para continuar.";
+				customerLoginFeedback.dataset.kind = "error";
+			}
+		}
+
+		const customerSessionReady = restoreCustomerSession();
+
+		async function refreshPaymentDetails() {
+			const { settings } = await window.apiRequest("/payment-settings", {
+				cache: "no-store",
+			});
+			document.querySelectorAll(".payment-mobile-details").forEach((details) => {
+				details.replaceChildren();
+				[
+					["Banco", `${settings.bankName} (${settings.bankCode})`],
+					["C.I/RIF", settings.documentId],
+					["Teléfono", settings.phone],
+				].forEach(([label, value]) => {
+					const line = document.createElement("p");
+					const name = document.createElement("strong");
+					name.textContent = `${label}: `;
+					line.append(name, document.createTextNode(value));
+					details.append(line);
+				});
+			});
+		}
+
+		membershipToggle.addEventListener("click", () => {
+			const expanded = membershipToggle.getAttribute("aria-expanded") === "true";
+			membershipToggle.setAttribute("aria-expanded", String(!expanded));
+			membershipOptions.hidden = expanded;
+			membershipPanel.hidden = true;
+			customerLoginPanel.hidden = true;
+			if (expanded) membershipToggle.removeAttribute("aria-current");
+			else membershipToggle.setAttribute("aria-current", "page");
+		});
+
+		customerLoginToggle.addEventListener("click", async () => {
+			await customerSessionReady;
+			if (customerSession) {
+				setCustomerSession(null);
+				customerLoginForm.reset();
+				customerLoginFeedback.textContent = "Sesión cerrada.";
+				customerLoginFeedback.removeAttribute("data-kind");
+				customerLoginPanel.hidden = false;
+				membershipPanel.hidden = true;
+				membershipOptions.hidden = true;
+				membershipToggle.setAttribute("aria-expanded", "false");
+				customerLoginPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+				document.querySelector("#customer-login-email").focus({ preventScroll: true });
+				return;
+			}
+			customerLoginPanel.hidden = false;
+			membershipPanel.hidden = true;
+			customerLoginPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+			document.querySelector("#customer-login-email").focus({ preventScroll: true });
+		});
+
+		customerLoginForm.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			customerLoginFeedback.textContent = "";
+			customerLoginFeedback.removeAttribute("data-kind");
+			const submitButton = customerLoginForm.querySelector('button[type="submit"]');
+			const values = Object.fromEntries(new FormData(customerLoginForm).entries());
+			values.email = String(values.email).trim();
+			submitButton.disabled = true;
+			try {
+				const data = await window.apiRequest("/customer/login", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(values),
+				});
+				customerLoginForm.reset();
+				setCustomerSession(data.customer, data.token);
+				customerLoginFeedback.textContent = `Sesión iniciada. Tu plan afiliado es ${data.customer.planName || "sin asignar"}.`;
+			} catch (error) {
+				customerLoginFeedback.textContent = error.message || "No se pudo iniciar sesión.";
+				customerLoginFeedback.dataset.kind = "error";
+			} finally {
+				submitButton.disabled = false;
+			}
+		});
+
+		document.querySelector("#membership-option").addEventListener("click", async () => {
+			await customerSessionReady;
+			if (!customerSession) {
+				membershipPanel.hidden = true;
+				customerLoginPanel.hidden = false;
+				customerLoginFeedback.textContent = "Inicia sesión para consultar tu afiliación y pagar la mensualidad.";
+				customerLoginFeedback.removeAttribute("data-kind");
+				customerLoginPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+				document.querySelector("#customer-login-email").focus({ preventScroll: true });
+				return;
+			}
+			await loadBcvRate();
+			membershipPanel.hidden = false;
+			customerLoginPanel.hidden = true;
+			membershipOptions.hidden = true;
+			membershipToggle.setAttribute("aria-expanded", "false");
+			membershipToggle.setAttribute("aria-current", "page");
+			membershipPlan.value = customerSession.planName || "";
+			updateMembershipPrice();
+			membershipPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+		});
+
+		document.querySelectorAll(".plan-select-button").forEach((button) => {
+			button.addEventListener("click", () => {
+				const planName = button.dataset.planName;
+				if (selectedPlanNames.includes(planName)) {
+					selectedPlanNames = selectedPlanNames.filter((name) => name !== planName);
+				} else {
+					if (selectedPlanNames.length >= 6) {
+						planSelectionFeedback.textContent = "Puedes seleccionar hasta 6 planes por inscripción.";
+						return;
+					}
+					selectedPlanNames = [...selectedPlanNames, planName];
+				}
+				selectedPlanName = selectedPlanNames.at(-1) || "";
+				if (selectedPlanName) {
+					localStorage.setItem("selectedPlanName", selectedPlanName);
+					membershipPlan.value = selectedPlanName;
+				} else {
+					localStorage.removeItem("selectedPlanName");
+				}
+				updateMembershipPrice();
+				updateRegistrationSelection();
+			});
+		});
+
+		membershipPaymentButton.addEventListener("click", async () => {
+			await customerSessionReady;
+			if (!customerSession || !membershipPlan.value) return;
+			await loadBcvRate();
+			membershipPaymentButton.disabled = true;
+			membershipPaymentFeedback.textContent = "";
+			try {
+				await refreshPaymentDetails();
+			} catch (error) {
+				membershipPaymentFeedback.textContent = error.message || "No se pudieron cargar los datos de pago.";
+				return;
+			} finally {
+				membershipPaymentButton.disabled = false;
+			}
+			membershipPaymentForm.hidden = false;
+			membershipPaymentForm.scrollIntoView({ behavior: "smooth", block: "start" });
+			document.querySelector("#membership-customer-name").focus({ preventScroll: true });
+		});
+
+		membershipPaymentForm.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			membershipPaymentFeedback.textContent = "";
+
+			await customerSessionReady;
+			if (!customerSession || !customerToken) {
+				membershipPaymentFeedback.textContent = "Inicia sesión para enviar el pago de mensualidad.";
+				membershipPaymentFeedback.dataset.kind = "error";
+				return;
+			}
+			if (customerSession.planPeriod !== "Mensualidad" || membershipPlan.value !== customerSession.planName) {
+				membershipPaymentFeedback.textContent = "Solo puedes pagar la mensualidad del plan afiliado a tu cuenta.";
+				membershipPaymentFeedback.dataset.kind = "error";
+				return;
+			}
+
+			const receipt = membershipPaymentProof.files[0];
+			if (!receipt || receipt.size > 8 * 1024 * 1024) {
+				membershipPaymentFeedback.textContent = "Selecciona un comprobante válido de máximo 8 MB.";
+				return;
+			}
+
+			const formData = new FormData(membershipPaymentForm);
+			formData.append("planName", customerSession.planName);
+			formData.append("paymentType", "membership");
+			submitMembershipPaymentButton.disabled = true;
+			submitMembershipPaymentButton.textContent = "Enviando comprobante...";
+
+			try {
+				await window.apiRequest("/pagos.js", {
+					method: "POST",
+					headers: { Authorization: `Bearer ${customerToken}` },
+					body: formData,
+				});
+				membershipPaymentFeedback.textContent = "Comprobante enviado correctamente. La administración lo revisará; al aprobarlo, actualizará tu próximo vencimiento. Si tu acceso estaba restringido, deberá habilitarlo manualmente.";
+				membershipPaymentFeedback.dataset.kind = "success";
+				membershipPaymentForm.reset();
+				membershipPaymentForm.elements.name.value = customerSession.name || "";
+				membershipPaymentForm.elements.email.value = customerSession.email || "";
+				membershipPaymentForm.elements.phone.value = customerSession.phone || "";
+			} catch (error) {
+				membershipPaymentFeedback.textContent = error.message || "No se pudo enviar el comprobante. Inténtalo de nuevo.";
+				membershipPaymentFeedback.dataset.kind = "error";
+			} finally {
+				submitMembershipPaymentButton.disabled = false;
+				submitMembershipPaymentButton.textContent = "Enviar comprobante";
+			}
+		});
+
+		document.querySelectorAll('.nav-link[href^="#"]').forEach((link) => {
+			link.addEventListener("click", () => {
+				membershipPanel.hidden = true;
+				customerLoginPanel.hidden = true;
+				membershipToggle.removeAttribute("aria-current");
+				membershipToggle.setAttribute("aria-expanded", "false");
+				membershipOptions.hidden = true;
+				document.querySelector('.nav-link[aria-current="page"]')?.removeAttribute("aria-current");
+				link.setAttribute("aria-current", "page");
+			});
+		});
+	</script>
+</body>
+</html>

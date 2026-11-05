@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#625477">
+	<title>Acceso | Esmeralda Gym</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<script src="/js/api.js" defer></script>
+	<style>
+		:root {
+			color-scheme: light;
+			font-family: "DM Sans", sans-serif;
+			font-synthesis: none;
+			--forest: #10251b;
+			--green: #167446;
+			--lime: #b4d83e;
+			--paper: #f3f6f3;
+			--ink: #17231c;
+			--muted: #68736c;
+			--line: #dce3de;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			min-width: 320px;
+			min-height: 100vh;
+			margin: 0;
+			display: grid;
+			place-items: center;
+			padding: 32px;
+			background-color: var(--paper);
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='144' viewBox='0 0 144 144'%3E%3Cg fill='none' stroke='%23c1cec4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' opacity='.72'%3E%3Cg transform='translate(17 22)'%3E%3Cpath d='M7 12h32M7 5v14M2 7v10M39 5v14M44 7v10'/%3E%3C/g%3E%3Cg transform='translate(82 88) rotate(-35 22 12)'%3E%3Cpath d='M7 12h32M7 5v14M2 7v10M39 5v14M44 7v10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+			background-size: 144px 144px;
+			color: var(--ink);
+		}
+
+		.auth-layout {
+			width: min(100%, 1040px);
+			min-height: 610px;
+			display: grid;
+			grid-template-columns: 1.05fr 0.95fr;
+			background: #f5f8f5;
+			box-shadow: 0 24px 70px #10251b20;
+			animation: arrive 500ms ease-out both;
+		}
+
+		.brand-panel {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 54px 44px 48px;
+			overflow: hidden;
+			background: var(--forest);
+			color: #fff;
+			text-align: center;
+		}
+
+		.brand-panel::before,
+		.brand-panel::after {
+			position: absolute;
+			width: 240px;
+			height: 240px;
+			border: 1px solid #ffffff16;
+			border-radius: 50%;
+			content: "";
+			pointer-events: none;
+		}
+
+		.brand-panel::before { top: -155px; left: -115px; }
+		.brand-panel::after { right: -145px; bottom: -170px; width: 310px; height: 310px; }
+
+		.brand-image-wrap {
+			position: relative;
+			z-index: 1;
+			width: min(100%, 360px);
+			aspect-ratio: 1;
+			display: grid;
+			place-items: center;
+			padding: 14px;
+			background: #fff;
+			box-shadow: 12px 12px 0 var(--lime);
+		}
+
+		.brand-image-wrap img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+
+		.brand-copy {
+			position: relative;
+			z-index: 1;
+			margin-top: 34px;
+		}
+
+		.brand-copy h1 {
+			margin: 0;
+			font-family: "Barlow Condensed", sans-serif;
+			font-size: 42px;
+			font-weight: 700;
+			line-height: 1;
+		}
+
+		.brand-copy p {
+			margin: 11px 0 0;
+			color: #c7d7cb;
+			font-size: 14px;
+		}
+
+		.form-panel {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 64px clamp(30px, 6vw, 76px);
+			background: var(--purple-surface);
+		}
+
+		.form-content { width: 100%; max-width: 350px; }
+
+		.eyebrow {
+			margin: 0 0 10px;
+			color: var(--green);
+			font-size: 12px;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+
+		.form-content h2 {
+			margin: 0;
+			font-family: "Barlow Condensed", sans-serif;
+			font-size: 38px;
+			font-weight: 700;
+			line-height: 1.05;
+		}
+
+		.intro { margin: 10px 0 28px; color: var(--muted); font-size: 14px; }
+
+		.mode-switch {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 4px;
+			margin-bottom: 26px;
+			padding: 4px;
+			background: #edf3ee;
+		}
+
+		.mode-switch button {
+			min-height: 42px;
+			border: 0;
+			background: transparent;
+			color: var(--muted);
+			font: 600 13px "DM Sans", sans-serif;
+			cursor: pointer;
+		}
+
+		.mode-switch button[aria-pressed="true"] {
+			background: #fff;
+			color: var(--forest);
+			box-shadow: 0 1px 4px #10251b1a;
+		}
+
+		.field { display: block; margin-bottom: 17px; }
+		.field[hidden] { display: none; }
+		.field span { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 600; }
+
+		.field input {
+			width: 100%;
+			min-height: 48px;
+			padding: 0 13px;
+			border: 1px solid var(--line);
+			border-radius: 2px;
+			background: #fff;
+			color: var(--ink);
+			font: 14px "DM Sans", sans-serif;
+			outline: none;
+			transition: border-color 160ms ease, box-shadow 160ms ease;
+		}
+
+		.field input:focus { border-color: var(--green); box-shadow: 0 0 0 3px #16744625; }
+
+		.password-input-wrap { position: relative; }
+		.password-input-wrap input { padding-right: 82px; }
+		.password-visibility-button {
+			position: absolute;
+			top: 50%;
+			right: 12px;
+			padding: 5px 0;
+			transform: translateY(-50%);
+			border: 0;
+			background: transparent;
+			color: var(--green);
+			font: 600 12px "DM Sans", sans-serif;
+			text-decoration: underline;
+			text-underline-offset: 2px;
+			cursor: pointer;
+		}
+		.password-visibility-button:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+		.submit-button {
+			width: 100%;
+			min-height: 50px;
+			margin-top: 5px;
+			border: 0;
+			background: var(--green);
+			color: #fff;
+			font: 700 14px "DM Sans", sans-serif;
+			cursor: pointer;
+			transition: background-color 160ms ease, transform 160ms ease;
+		}
+
+		.submit-button:hover { background: var(--forest); }
+		.submit-button:active { transform: translateY(1px); }
+		.submit-button:disabled { cursor: wait; opacity: 0.7; }
+
+		.text-button {
+			display: block;
+			margin: 16px auto 0;
+			padding: 0;
+			border: 0;
+			background: transparent;
+			color: var(--green);
+			font: 600 13px "DM Sans", sans-serif;
+			text-decoration: underline;
+			text-underline-offset: 3px;
+			cursor: pointer;
+		}
+
+		.text-button:hover { color: var(--forest); }
+
+		.feedback { min-height: 22px; margin: 14px 0 0; font-size: 13px; line-height: 1.5; }
+		.feedback[data-kind="error"] { color: #b42318; }
+		.feedback[data-kind="success"] { color: var(--forest); }
+
+		@keyframes arrive {
+			from { opacity: 0; transform: translateY(10px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		@media (max-width: 720px) {
+			body { padding: 16px; }
+			.auth-layout { max-width: 480px; grid-template-columns: 1fr; }
+			.brand-panel { padding: 28px 24px 24px; }
+			.brand-image-wrap { width: min(58vw, 220px); padding: 9px; box-shadow: 7px 7px 0 var(--lime); }
+			.brand-copy { margin-top: 21px; }
+			.brand-copy h1 { font-size: 32px; }
+			.brand-copy p { margin-top: 7px; font-size: 12px; }
+			.form-panel { padding: 34px 28px 40px; }
+			.form-content h2 { font-size: 34px; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<main class="auth-layout">
+		<section class="brand-panel" aria-label="Esmeralda Gym">
+			<div class="brand-image-wrap">
+				<img src="/images/images.jpg" alt="Logotipo de Esmeralda Gym">
+			</div>
+			<div class="brand-copy">
+				<h1>Bienvenidos a Esmeralda Gym</h1>
+				<p>Tu esfuerzo de hoy construye tu fuerza de mañana.</p>
+			</div>
+		</section>
+
+		<section class="form-panel" aria-labelledby="form-title">
+			<div class="form-content">
+				<p class="eyebrow">Entrena con nosotros</p>
+				<h2 id="form-title">Inicia sesión</h2>
+				<p class="intro" id="form-intro">Accede a tu cuenta para continuar.</p>
+
+				<div class="mode-switch" id="mode-switch" role="group" aria-label="Tipo de acceso">
+					<button type="button" id="login-mode" aria-pressed="true">Iniciar sesión</button>
+					<button type="button" id="register-mode" aria-pressed="false">Crear cuenta</button>
+				</div>
+
+				<form id="auth-form">
+					<label class="field" id="username-field" for="username" hidden>
+						<span>Nombre</span>
+						<input id="username" name="username" type="text" autocomplete="username" minlength="3" maxlength="40">
+					</label>
+					<label class="field" id="email-field" for="email" hidden>
+						<span>Correo electrónico</span>
+						<input id="email" name="email" type="email" autocomplete="email" maxlength="254">
+					</label>
+					<label class="field" id="identifier-field" for="identifier">
+						<span>Correo electrónico o usuario</span>
+						<input id="identifier" name="identifier" type="text" autocomplete="username" maxlength="254" required>
+					</label>
+					<label class="field" for="password">
+						<span>Contraseña</span>
+						<div class="password-input-wrap">
+							<input id="password" name="password" type="password" autocomplete="current-password" minlength="8" required>
+							<button class="password-visibility-button" id="toggle-password-visibility" type="button" aria-controls="password" aria-pressed="false">Mostrar</button>
+						</div>
+					</label>
+					<label class="field" id="confirm-field" for="confirm-password" hidden>
+						<span>Confirma tu contraseña</span>
+						<input id="confirm-password" name="confirmPassword" type="password" autocomplete="new-password" minlength="8">
+					</label>
+					<label class="field" id="register-code-field" for="register-code" hidden>
+						<span>Código de verificación de 6 dígitos</span>
+						<input id="register-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6">
+					</label>
+					<button class="submit-button" id="send-registration-code" type="button" hidden>Enviar código de verificación</button>
+					<button class="submit-button" id="submit-button" type="submit">Entrar</button>
+					<button class="text-button" id="forgot-password" type="button">¿Olvidaste tu contraseña?</button>
+				</form>
+
+				<form id="reset-form" hidden>
+					<label class="field" for="reset-email">
+						<span>Correo electrónico de tu cuenta</span>
+						<input id="reset-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+					</label>
+					<button class="submit-button" id="send-code" type="button">Enviar código de verificación</button>
+					<div id="reset-code-fields" hidden>
+						<label class="field" for="reset-code">
+							<span>Código de 6 dígitos</span>
+							<input id="reset-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required>
+						</label>
+						<label class="field" for="new-password">
+							<span>Contraseña nueva</span>
+							<input id="new-password" name="password" type="password" autocomplete="new-password" minlength="8" required>
+						</label>
+						<label class="field" for="confirm-new-password">
+							<span>Confirma tu contraseña nueva</span>
+							<input id="confirm-new-password" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required>
+						</label>
+						<button class="submit-button" id="reset-submit" type="submit">Cambiar contraseña</button>
+					</div>
+					<button class="text-button" id="back-to-login" type="button">Volver al inicio de sesión</button>
+				</form>
+				<p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+				<a class="text-button" href="/admin">Acceso administrativo</a>
+			</div>
+		</section>
+	</main>
+
+	<script>
+		const form = document.querySelector("#auth-form");
+		const loginMode = document.querySelector("#login-mode");
+		const registerMode = document.querySelector("#register-mode");
+		const usernameField = document.querySelector("#username-field");
+		const username = document.querySelector("#username");
+		const emailField = document.querySelector("#email-field");
+		const email = document.querySelector("#email");
+		const identifier = document.querySelector("#identifier");
+		const confirmField = document.querySelector("#confirm-field");
+		const confirmPassword = document.querySelector("#confirm-password");
+		const password = document.querySelector("#password");
+		const togglePasswordVisibility = document.querySelector("#toggle-password-visibility");
+		const registerCodeField = document.querySelector("#register-code-field");
+		const registerCode = document.querySelector("#register-code");
+		const sendRegistrationCodeButton = document.querySelector("#send-registration-code");
+		const submitButton = document.querySelector("#submit-button");
+		const feedback = document.querySelector("#feedback");
+		const resetForm = document.querySelector("#reset-form");
+		const resetEmail = document.querySelector("#reset-email");
+		const resetCodeFields = document.querySelector("#reset-code-fields");
+		const sendCodeButton = document.querySelector("#send-code");
+		const resetSubmitButton = document.querySelector("#reset-submit");
+		let mode = "login";
+		let registrationResendTimer;
+
+		function clearFeedback() {
+			feedback.textContent = "";
+			feedback.removeAttribute("data-kind");
+		}
+
+		function showFeedback(message, kind) {
+			feedback.textContent = message;
+			feedback.dataset.kind = kind;
+		}
+
+		function setPasswordVisibility(visible) {
+			password.type = visible ? "text" : "password";
+			togglePasswordVisibility.textContent = visible ? "Ocultar" : "Mostrar";
+			togglePasswordVisibility.setAttribute("aria-pressed", String(visible));
+		}
+
+		function setMode(nextMode) {
+			clearInterval(registrationResendTimer);
+			mode = nextMode;
+			setPasswordVisibility(false);
+			const registering = mode === "register";
+			loginMode.setAttribute("aria-pressed", String(!registering));
+			registerMode.setAttribute("aria-pressed", String(registering));
+			usernameField.hidden = !registering;
+			username.required = registering;
+			emailField.hidden = !registering;
+			email.required = registering;
+			document.querySelector("#identifier-field").hidden = registering;
+			identifier.required = !registering;
+			confirmField.hidden = !registering;
+			confirmPassword.required = registering;
+			registerCodeField.hidden = true;
+			registerCode.required = false;
+			registerCode.value = "";
+			[username, email, password, confirmPassword].forEach((input) => { input.readOnly = false; });
+			sendRegistrationCodeButton.hidden = !registering;
+			sendRegistrationCodeButton.disabled = false;
+			sendRegistrationCodeButton.textContent = "Enviar código de verificación";
+			submitButton.hidden = registering;
+			password.autocomplete = registering ? "new-password" : "current-password";
+			document.querySelector("#form-title").textContent = registering ? "Crea tu cuenta" : "Inicia sesión";
+			document.querySelector("#form-intro").textContent = registering
+				? "Regístrate para formar parte de Esmeralda Gym."
+				: "Accede a tu cuenta para continuar.";
+			submitButton.textContent = registering ? "Crear cuenta" : "Entrar";
+			document.querySelector("#forgot-password").hidden = registering;
+			form.hidden = false;
+			resetForm.hidden = true;
+			document.querySelector("#mode-switch").hidden = false;
+			clearFeedback();
+		}
+
+		setMode("login");
+		togglePasswordVisibility.addEventListener("click", () => {
+			setPasswordVisibility(password.type === "password");
+		});
+		loginMode.addEventListener("click", () => setMode("login"));
+		registerMode.addEventListener("click", () => setMode("register"));
+		sendRegistrationCodeButton.addEventListener("click", async () => {
+			clearFeedback();
+			if (!form.reportValidity()) return;
+			if (password.value !== confirmPassword.value) {
+				showFeedback("Las contraseñas no coinciden.", "error");
+				confirmPassword.focus();
+				return;
+			}
+
+			sendRegistrationCodeButton.disabled = true;
+			sendRegistrationCodeButton.textContent = "Enviando código...";
+			try {
+				const data = await window.apiRequest("/auth/register/send-code", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						username: username.value.trim(),
+						email: email.value.trim(),
+						password: password.value,
+					}),
+				});
+				registerCodeField.hidden = false;
+				registerCode.required = true;
+				submitButton.hidden = false;
+				[username, email, password, confirmPassword].forEach((input) => { input.readOnly = true; });
+				showFeedback(data.message, "success");
+				registerCode.focus();
+
+				let secondsRemaining = 60;
+				sendRegistrationCodeButton.textContent = `Reenviar código en ${secondsRemaining} s`;
+				registrationResendTimer = setInterval(() => {
+					secondsRemaining -= 1;
+					if (secondsRemaining <= 0) {
+						clearInterval(registrationResendTimer);
+						sendRegistrationCodeButton.disabled = false;
+						sendRegistrationCodeButton.textContent = "Enviar código de nuevo";
+						return;
+					}
+					sendRegistrationCodeButton.textContent = `Reenviar código en ${secondsRemaining} s`;
+				}, 1000);
+			} catch (error) {
+				showFeedback(error.message || "No se pudo enviar el código.", "error");
+				sendRegistrationCodeButton.disabled = false;
+				sendRegistrationCodeButton.textContent = "Enviar código de verificación";
+			}
+		});
+		document.querySelector("#forgot-password").addEventListener("click", () => {
+			form.hidden = true;
+			resetForm.hidden = false;
+			document.querySelector("#mode-switch").hidden = true;
+			document.querySelector("#form-title").textContent = "Recupera tu contraseña";
+			document.querySelector("#form-intro").textContent = "Primero verificaremos tu correo electrónico.";
+			resetEmail.value = identifier.value.includes("@") ? identifier.value.trim() : "";
+			resetCodeFields.hidden = true;
+			clearFeedback();
+			resetEmail.focus();
+		});
+
+		document.querySelector("#back-to-login").addEventListener("click", () => {
+			resetForm.reset();
+			setMode("login");
+		});
+
+		sendCodeButton.addEventListener("click", async () => {
+			clearFeedback();
+			if (!resetEmail.reportValidity()) return;
+
+			sendCodeButton.disabled = true;
+			sendCodeButton.textContent = "Enviando código...";
+			try {
+				const data = await window.apiRequest("/auth/forgot-password", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ email: resetEmail.value.trim() }),
+				});
+				resetCodeFields.hidden = false;
+				showFeedback(data.message, "success");
+				document.querySelector("#reset-code").focus();
+			} catch (error) {
+				showFeedback(error.message || "No se pudo enviar el código.", "error");
+			} finally {
+				sendCodeButton.disabled = false;
+				sendCodeButton.textContent = "Enviar código de nuevo";
+			}
+		});
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			clearFeedback();
+
+			if (mode === "register" && password.value !== confirmPassword.value) {
+				showFeedback("Las contraseñas no coinciden.", "error");
+				confirmPassword.focus();
+				return;
+			}
+
+			submitButton.disabled = true;
+			submitButton.textContent = mode === "register" ? "Verificando código..." : "Ingresando...";
+
+			try {
+				const data = await window.apiRequest(mode === "register" ? "/auth/register/verify-code" : "/auth/login", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(mode === "register"
+						? { email: email.value.trim(), code: registerCode.value.trim() }
+						: { identifier: identifier.value.trim(), password: password.value }),
+				}, { retryNetworkError: mode === "login" });
+
+				if (mode === "register") {
+					setMode("login");
+					showFeedback("Cuenta creada. Ya puedes iniciar sesión.", "success");
+				} else {
+					if (!data || !data.token) throw new Error("No se recibió una sesión válida. Intenta de nuevo.");
+					localStorage.setItem("token", data.token);
+					if (data.username) localStorage.setItem("username", data.username);
+					window.location.assign("/app");
+				}
+			} catch (error) {
+				showFeedback(error.message || "No se pudo completar la solicitud.", "error");
+			} finally {
+				submitButton.disabled = false;
+				submitButton.textContent = mode === "register" ? "Crear cuenta" : "Entrar";
+			}
+		});
+
+		resetForm.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			clearFeedback();
+
+			const newPassword = document.querySelector("#new-password");
+			const confirmNewPassword = document.querySelector("#confirm-new-password");
+			if (newPassword.value !== confirmNewPassword.value) {
+				showFeedback("Las contraseñas no coinciden.", "error");
+				confirmNewPassword.focus();
+				return;
+			}
+
+			resetSubmitButton.disabled = true;
+			resetSubmitButton.textContent = "Actualizando contraseña...";
+			try {
+				const data = await window.apiRequest("/auth/reset-password", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						email: resetEmail.value.trim(),
+						code: document.querySelector("#reset-code").value.trim(),
+						password: newPassword.value,
+					}),
+				});
+				resetForm.reset();
+				setMode("login");
+				showFeedback(data.message, "success");
+			} catch (error) {
+				showFeedback(error.message || "No se pudo actualizar la contraseña.", "error");
+			} finally {
+				resetSubmitButton.disabled = false;
+				resetSubmitButton.textContent = "Cambiar contraseña";
+			}
+		});
+	</script>
+</body>
+</html>

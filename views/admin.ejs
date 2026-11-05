@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#10251b">
+	<title>Administración | Esmeralda Gym</title>
+	<link rel="stylesheet" href="/css/admin.css">
+	<script src="/js/admin.js" defer></script>
+</head>
+<body class="admin-body">
+	<header class="admin-header">
+		<a class="admin-brand" href="/admin">
+			<img src="/images/images.jpg" alt="">
+			<span>ESMERALDA <strong>ADMIN</strong></span>
+		</a>
+		<a class="back-link" href="/app">Volver al sitio</a>
+	</header>
+
+	<main class="admin-main">
+		<section class="admin-login-card" id="admin-login">
+			<p class="admin-eyebrow">ACCESO RESTRINGIDO</p>
+			<h1>Administración</h1>
+			<p class="muted-copy">Ingresa con las credenciales administrativas para revisar los pagos.</p>
+			<form id="admin-login-form">
+				<label for="admin-email">Correo administrativo</label>
+				<input id="admin-email" name="email" type="email" autocomplete="username" required>
+				<label for="admin-password">Contraseña</label>
+				<input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+				<button class="primary-button" type="submit">Entrar al panel</button>
+			</form>
+			<p class="admin-feedback" id="login-feedback" role="status" aria-live="polite"></p>
+		</section>
+
+		<section class="admin-dashboard" id="admin-dashboard" hidden>
+			<div class="dashboard-heading">
+				<div>
+					<p class="admin-eyebrow">PANEL ADMINISTRATIVO</p>
+					<h1>Centro de administración</h1>
+					<p class="muted-copy">Gestiona clientes, planes, mensualidades y pagos desde un solo lugar.</p>
+				</div>
+				<button class="secondary-button" id="admin-logout" type="button">Cerrar sesión</button>
+			</div>
+
+			<nav class="admin-navigation" aria-label="Secciones administrativas">
+				<a href="#register-customers">Clientes</a>
+				<a href="#plans">Planes</a>
+				<a href="#payment-settings">Datos de pago</a>
+				<a href="#memberships">Mensualidades</a>
+				<a href="#monthly-payments">Pagos mensuales</a>
+			</nav>
+
+			<section class="register-customers-panel" id="register-customers" aria-labelledby="register-customers-title">
+				<div class="panel-heading">
+					<div>
+						<h2 id="register-customers-title">Registrar clientes</h2>
+						<p class="muted-copy">Registra los datos del cliente, el monto pagado por inscripción y su comprobante. Los planes de mensualidad se agregarán automáticamente al control; los semanales no se incluirán en el control mensual.</p>
+					</div>
+				</div>
+				<form id="register-customer-form">
+					<label>
+						<span>Nombre</span>
+						<input name="firstName" type="text" maxlength="50" autocomplete="given-name" required>
+					</label>
+					<label>
+						<span>Apellido</span>
+						<input name="lastName" type="text" maxlength="50" autocomplete="family-name" required>
+					</label>
+					<label>
+						<span>Número telefónico</span>
+						<input name="phone" type="tel" maxlength="20" autocomplete="tel" required>
+					</label>
+					<label>
+						<span>Correo electrónico</span>
+						<input name="email" type="email" maxlength="254" autocomplete="email" required>
+					</label>
+					<label>
+						<span>Contraseña inicial (mínimo 8 caracteres)</span>
+						<input name="password" type="password" minlength="8" maxlength="72" autocomplete="new-password" required>
+						<small>Compártela directamente con el cliente; no se guarda en texto visible.</small>
+					</label>
+					<label>
+						<span>Fecha de registro / último pago</span>
+						<input name="registrationDate" type="date" required>
+						<small>Se usa para calcular el próximo vencimiento mensual.</small>
+					</label>
+					<label>
+						<span>Plan</span>
+						<select name="planName" required>
+							<option value="">Cargando planes disponibles...</option>
+						</select>
+						<small id="customer-plans-feedback" role="status" aria-live="polite">Los planes disponibles aparecerán aquí.</small>
+					</label>
+					<label>
+						<span>Monto de inscripción (USD)</span>
+						<input name="enrollmentAmount" type="number" min="0" max="99999999.99" step="0.01" value="" readonly required>
+						<small>Se completa automáticamente con el monto definido para el plan seleccionado.</small>
+					</label>
+					<label>
+						<span>Comprobante de inscripción</span>
+						<input name="enrollmentProof" type="file" accept="image/jpeg,image/png" required>
+						<small>Obligatorio. Imagen JPG o PNG, máximo 8 MB.</small>
+					</label>
+					<button class="primary-button" type="submit">Registrar cliente</button>
+				</form>
+				<p class="admin-feedback" id="register-customer-feedback" role="status" aria-live="polite"></p>
+				<div class="registered-customers">
+					<div class="panel-heading">
+						<div>
+							<h3>Clientes registrados</h3>
+							<p class="muted-copy">La fecha de afiliación se mantiene como referencia para los vencimientos mensuales. Por seguridad, las contraseñas no se muestran.</p>
+						</div>
+						<button class="secondary-button" id="refresh-customers" type="button">Actualizar lista</button>
+					</div>
+					<label class="customer-search" for="customer-search">
+						<span>Buscar cliente por nombre, apellido o teléfono</span>
+						<input id="customer-search" type="search" autocomplete="off" placeholder="Escribe un nombre o número telefónico">
+					</label>
+					<p class="admin-feedback" id="customers-feedback" role="status" aria-live="polite"></p>
+					<div class="table-scroll">
+						<table>
+							<thead>
+								<tr><th>Cliente</th><th>Correo electrónico</th><th>Teléfono</th><th>Plan afiliado</th><th>Fecha de afiliación</th><th>Inscripción (USD)</th><th>Comprobante</th><th>Acceso</th><th>Acciones</th></tr>
+							</thead>
+							<tbody id="customers-list"></tbody>
+						</table>
+					</div>
+					<p class="empty-state" id="empty-customers" hidden>No hay clientes registrados.</p>
+					<form id="edit-customer-form" hidden>
+						<h3>Editar cliente</h3>
+						<input name="customerId" type="hidden">
+						<label>
+							<span>Nombre</span>
+							<input name="firstName" type="text" maxlength="50" required>
+						</label>
+						<label>
+							<span>Apellido(s)</span>
+							<input name="lastName" type="text" maxlength="50" required>
+						</label>
+						<label>
+							<span>Teléfono</span>
+							<input name="phone" type="tel" maxlength="20" autocomplete="tel" required>
+						</label>
+						<label>
+							<span>Correo electrónico</span>
+							<input name="email" type="email" maxlength="254" autocomplete="email" required>
+						</label>
+						<label>
+							<span>Fecha de afiliación</span>
+							<input name="registrationDate" type="date" required>
+						</label>
+						<label>
+							<span>Monto de inscripción pagado (USD)</span>
+							<input name="enrollmentAmount" type="number" min="0" max="99999999.99" step="0.01" required>
+						</label>
+						<button class="primary-button" type="submit">Guardar cambios</button>
+						<button class="secondary-button" id="cancel-customer-edit" type="button">Cancelar</button>
+					</form>
+				</div>
+				<div class="customer-access-settings">
+					<h3>Actualizar acceso de un cliente existente</h3>
+					<p class="muted-copy">Úsalo para asignar o restablecer la contraseña de clientes registrados antes de habilitar el inicio de sesión.</p>
+					<form id="customer-access-form">
+						<label>
+							<span>Correo electrónico registrado</span>
+							<input name="email" type="email" maxlength="254" autocomplete="email" required>
+						</label>
+						<label>
+							<span>Nueva contraseña (mínimo 8 caracteres)</span>
+							<input name="password" type="password" minlength="8" maxlength="72" autocomplete="new-password" required>
+						</label>
+						<button class="secondary-button" type="submit">Actualizar acceso</button>
+					</form>
+					<p class="admin-feedback" id="customer-access-feedback" role="status" aria-live="polite"></p>
+				</div>
+			</section>
+
+			<section class="plans-panel" id="plans" aria-labelledby="plans-title">
+				<div class="panel-heading">
+					<div>
+						<h2 id="plans-title">Planes</h2>
+						<p class="muted-copy">Crea planes o modifica su nombre, descripción, beneficios, imagen, precios y período. Los cambios se muestran en el menú de clientes.</p>
+					</div>
+					<button class="secondary-button" id="reset-plan-form" type="button" hidden>Cancelar edición</button>
+				</div>
+				<form id="plan-form" enctype="multipart/form-data">
+					<input name="planId" type="hidden">
+					<label>
+						<span>Nombre del plan</span>
+						<input name="name" type="text" maxlength="40" required>
+					</label>
+					<label class="plan-description-field">
+						<span>Descripción del plan (máximo 500 caracteres)</span>
+						<textarea name="description" rows="3" maxlength="500" required></textarea>
+					</label>
+					<label class="plan-benefits-field">
+						<span>Beneficios del plan (uno por línea, máximo 2000 caracteres)</span>
+						<textarea name="benefits" rows="5" maxlength="2000" required></textarea>
+						<small>Escribe cada beneficio en una línea. Se mostrarán en el menú de clientes.</small>
+					</label>
+					<label>
+						<span>Precio de inscripción (USD)</span>
+						<input name="enrollmentFee" type="number" min="0" max="99999999.99" step="0.01" required>
+					</label>
+					<label>
+						<span>Precio de mensualidad (USD)</span>
+						<input name="membershipFee" type="number" min="0.01" max="99999999.99" step="0.01" required>
+					</label>
+					<label>
+						<span>Período</span>
+						<select name="period" required>
+							<option value="Mensualidad">Mensualidad</option>
+							<option value="Semana">Semana</option>
+						</select>
+					</label>
+					<label>
+						<span>Imagen del plan (JPG o PNG, máximo 5 MB)</span>
+						<input name="image" type="file" accept="image/jpeg,image/png">
+						<small>Obligatoria al crear un plan; al editar, déjala vacía para conservar la imagen actual.</small>
+					</label>
+					<button class="primary-button" type="submit">Agregar plan</button>
+				</form>
+				<p class="admin-feedback" id="plans-feedback" role="status" aria-live="polite"></p>
+				<div class="table-scroll">
+					<table>
+						<thead>
+							<tr><th>Imagen</th><th>Plan</th><th>Inscripción</th><th>Mensualidad</th><th>Período</th><th></th></tr>
+						</thead>
+						<tbody id="plans-list"></tbody>
+					</table>
+				</div>
+				<p class="empty-state" id="empty-plans" hidden>No hay planes disponibles.</p>
+			</section>
+
+			<section class="payment-settings-panel" id="payment-settings" aria-labelledby="payment-settings-title">
+				<div class="panel-heading">
+					<div>
+						<h2 id="payment-settings-title">Datos de Pago Móvil</h2>
+						<p class="muted-copy">Estos datos aparecerán en los formularios de pago de inscripción y mensualidad para los clientes.</p>
+					</div>
+				</div>
+				<form id="payment-settings-form">
+					<label>
+						<span>Banco</span>
+						<input name="bankName" type="text" maxlength="80" required>
+					</label>
+					<label>
+						<span>Código del banco</span>
+						<input name="bankCode" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required>
+					</label>
+					<label>
+						<span>Cédula o RIF</span>
+						<input name="documentId" type="text" inputmode="text" maxlength="20" required>
+					</label>
+					<label>
+						<span>Teléfono de Pago Móvil</span>
+						<input name="phone" type="tel" maxlength="20" required>
+					</label>
+					<button class="primary-button" type="submit">Guardar datos de pago</button>
+				</form>
+				<p class="admin-feedback" id="payment-settings-feedback" role="status" aria-live="polite"></p>
+			</section>
+
+			<section class="memberships-panel" id="memberships" aria-labelledby="memberships-title">
+				<div class="panel-heading">
+					<div>
+						<h2 id="memberships-title">Control de mensualidades</h2>
+						<p class="muted-copy">La fecha de afiliación marca el día de vencimiento mensual. Al aprobar un pago, el próximo vencimiento avanza un mes desde la fecha programada, aunque se pague unos días antes o después. Se envían recordatorios 7 días y 1 día antes. Si acumula más de 5 días de mora, puedes restringir el acceso; si estaba restringido, usa «Habilitar acceso e instalaciones» para restablecer manualmente sus beneficios.</p>
+					</div>
+					<button class="secondary-button" id="refresh-memberships" type="button">Actualizar control</button>
+				</div>
+				<div class="table-scroll">
+					<table>
+						<thead>
+							<tr><th>Cliente afiliado</th><th>Plan afiliado</th><th>Fecha de afiliación</th><th>Próximo pago</th><th>Monto mensual</th><th>Estado</th><th>Recordatorios</th><th>Acceso al gimnasio</th></tr>
+						</thead>
+						<tbody id="memberships-list"></tbody>
+					</table>
+				</div>
+				<p class="empty-state" id="empty-memberships" hidden></p>
+				<p class="admin-feedback" id="memberships-feedback" role="status" aria-live="polite"></p>
+			</section>
+
+			<section class="monthly-payments-panel" id="monthly-payments" aria-labelledby="monthly-payments-title">
+				<div class="payment-toolbar">
+					<div>
+						<h2 id="monthly-payments-title">Pagos de mensualidad</h2>
+						<p class="muted-copy">Revisa los comprobantes de mensualidad y aprueba los pagos verificados.</p>
+					</div>
+					<label for="monthly-payment-filter">Mostrar</label>
+					<select id="monthly-payment-filter">
+						<option value="pending">Pendientes</option>
+						<option value="approved">Aprobados</option>
+						<option value="all">Todos</option>
+					</select>
+					<button class="secondary-button" id="refresh-monthly-payments" type="button">Actualizar mensualidades</button>
+				</div>
+				<p class="admin-feedback" id="monthly-payments-feedback" role="status" aria-live="polite"></p>
+				<div class="table-scroll">
+					<table>
+						<thead>
+							<tr><th>Cliente</th><th>Plan</th><th>Estado</th><th></th></tr>
+						</thead>
+						<tbody id="monthly-payments-list"></tbody>
+					</table>
+				</div>
+				<p class="empty-state" id="empty-monthly-payments" hidden>No hay comprobantes de mensualidad para este filtro.</p>
+			</section>
+
+			<section class="payment-detail" id="payment-detail" aria-labelledby="detail-title" hidden>
+				<h2 id="detail-title">Detalle del pago</h2>
+				<dl id="payment-data"></dl>
+				<div class="receipt-preview" id="receipt-preview"></div>
+				<button class="primary-button approve-button" id="approve-payment" type="button" hidden>Aprobar pago y enviar factura</button>
+				<p class="admin-feedback" id="detail-feedback" role="status" aria-live="polite"></p>
+			</section>
+		</section>
+	</main>
+</body>
+</html>
